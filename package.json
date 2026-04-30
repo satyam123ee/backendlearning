@@ -2,6 +2,7 @@
   "name": "chai-aur-code",
   "version": "1.0.0",
   "description": "a cide for backend ",
+  "type": "commonjs",
   "keywords": [
     "chai",
     "backend",
@@ -9,9 +10,12 @@
   ],
   "license": "ISC",
   "author": "satyam saxena",
-  "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3"
   }
 }
