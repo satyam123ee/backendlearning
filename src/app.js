@@ -1,11 +1,11 @@
 import express from "express"
-import cors from "cors" // Cross-Origin Resource Sharing (CORS) middleware
+import cors from "cors" // Cross-Origin Resource Sharing (CORS) middleware for connecting frontend and backend
 import cookieParser from "cookie-parser" // Middleware to parse cookies from incoming requests
 
 
 const app = express() // Create an instance of the Express application
 
-app.use(cors({
+app.use(cors({// Configure CORS options
     origin: process.env.CORS_ORIGIN,
     credentials: true
 }))

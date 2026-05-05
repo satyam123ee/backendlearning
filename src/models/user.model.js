@@ -80,7 +80,7 @@ export default mongoose.model("User",userSchema)
 //jwt token ek bearer token hota hai, jisme user ki information hoti hai, aur usko sign karne ke liye ek secret key hoti hai, jisse hum verify kar sakte hain ki token valid hai ya nahi, aur usme se user ki information nikal sakte hain, taki hum user ko authenticate kar sakein, aur uske permissions check kar sakein.*/
 import mongoose, {Schema} from "mongoose";
 import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt"  
 
 const userSchema = new Schema(
     {
