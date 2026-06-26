@@ -90,7 +90,7 @@ const loginUser= asyncHandler(async (req,res)=>{
     //acess and refresh token dena 
     // send krdo cookies mein
 const{email,username ,password}= req.body
-  if(!username||!email){
+  if(!(username||email)){//this is the correct way to write rathen then (!||!)
     throw new ApiError(400,"username or email is required")
 
   }
@@ -101,7 +101,8 @@ if(!user ){
     throw new ApiError(400,"user not found")
 }
 
- const isPasswordValid=await user.isPasswordCorrect(password)
+ const isPasswordValid=await user.isPasswordCorrect(password)//THIS IS USE TO CHNAGE Thew password 
+
  if(!isPasswordValid ){
     throw new ApiError(400,"password is incorrect ")
 }
@@ -124,7 +125,7 @@ return res
         200,
         {
             user: loggedInUser,accessToken,refreshToken
-        } ,  
+        } ,  //ye bala work itna jaruri nii tha but krna pdta h for someone who uuse that for mobile development and also save for info in local storage
         "user logged in successfully"
 )
 )
@@ -132,13 +133,32 @@ return res
 
 
 })
-
+//logout user ko krna h toh sbse phle cookie ko clear krna hoga and also refresh token ko clear krna hoga 
 const logoutUser = asyncHandler(async(req,res)=>{
-     User.findByIdAndUpdate(req.user._id,)
+    await  User.findByIdAndUpdate(req.user._id,{
+        $set:{//set kya kya object humko update krna h vo vo bta do vo sirf unhi field ko update kr dega 
+            refreshToken:undefined
+        }
+},
+{
+    new: true
+})
+const option ={
+    httpOnly:true,
+    secure: true //ye sirf server se hi change ho  sakti h frontend baegra koi bhi isko change ni kr skta
+//intilisation of cookie
+
+}
+return res.status(200)
+.clearCookie("accessToken",option)
+.clearCookie("refreshToken",option)
+.json(new ApiResponse(200,{},"user logout successfully  "))
+})//yha sbse phle id do ki konsi id ko upfatre krna h then update krne ke liye query send kro database mein
 export {
     loginUser, 
     logoutUser,
-     registerUser }
+     registerUser
+     }
 
 
 

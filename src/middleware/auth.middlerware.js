@@ -24,3 +24,5 @@ export const verifyJWT = asyncHandler(async(req,res,next)=>{
         throw new ApiError(401,error?.message||"invalid acess token")
     }
 })//header for mobile development 
+
+//auth ka middleware use isiliye krte h kyuki bus ye verify krega ki ye user login h ya ni h 
